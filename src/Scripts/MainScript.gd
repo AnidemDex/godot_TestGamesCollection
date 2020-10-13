@@ -21,7 +21,7 @@ func load_world(scene) -> void:
 	game_state = LoadStates.TRANSITION_IN
 	$UI/LoadingScreen.transition.play("FadeIn")
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if game_state == LoadStates.LOADING:
 		update_loadscreen()
 		if GLOBAL.resource.is_ready(loading_world):
