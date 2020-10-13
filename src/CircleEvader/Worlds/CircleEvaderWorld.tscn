@@ -1,0 +1,109 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/CircleEvader/scripts/CircleEvaderWorld.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Fonts/Silver.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://src/CircleEvader/scripts/HUDCircleEvader.gd" type="Script" id=3]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1024, 0, 0, 0, 0, 0, 1024, 600, 0, 0, 0, 0, 0, 600, 0, 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="DynamicFont" id=2]
+size = 64
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 64
+font_data = ExtResource( 2 )
+
+[node name="CircleEvaderWorld" type="Node"]
+script = ExtResource( 1 )
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="StartTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="PlayerSpawnPoint" type="Position2D" parent="."]
+position = Vector2( 534.896, 112.373 )
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource( 1 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.113725, 0.109804, 0.109804, 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource( 3 )
+
+[node name="ScoreLabel" type="Label" parent="HUD"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -532.0
+margin_right = 532.0
+margin_bottom = 72.0
+custom_fonts/font = SubResource( 2 )
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MessageLabel" type="Label" parent="HUD"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -465.5
+margin_top = -36.0
+margin_right = 465.5
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 2 )
+text = "Muevete con el mouse y evita todo lo que se venga"
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="StartButton" type="Button" parent="HUD"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -176.0
+margin_top = 100.0
+margin_right = 184.0
+margin_bottom = 200.0
+custom_fonts/font = SubResource( 3 )
+text = "Comenzar"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MessageTimer" type="Timer" parent="HUD"]
+wait_time = 3.0
+one_shot = true
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
+[connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="pressed" from="HUD/StartButton" to="HUD" method="_on_StartButton_pressed"]
+[connection signal="timeout" from="HUD/MessageTimer" to="HUD" method="_on_MessageTimer_timeout"]

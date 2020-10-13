@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/Scripts/MainScript.gd" type="Script" id=1]
+[ext_resource path="res://src/Misc/LoadingScreen.tscn" type="PackedScene" id=2]
+
+[node name="Main" type="Node"]
+script = ExtResource( 1 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="LoadingScreen" parent="UI" instance=ExtResource( 2 )]
+mouse_filter = 2
+
+[node name="WorldScene" type="Spatial" parent="."]
+[connection signal="finished_animation" from="UI/LoadingScreen" to="." method="_on_LoadingScreen_finished_animation"]
