@@ -12,7 +12,6 @@ func _ready() -> void:
 	
 
 func _process(_delta: float) -> void:
-	print($AnimationPlayer.current_animation)
 	if player != null:
 		if can_follow:
 			direction = player.global_position-position

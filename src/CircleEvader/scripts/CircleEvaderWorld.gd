@@ -38,7 +38,6 @@ func _on_EnemySpawnTimer_timeout() -> void:
 	_enemy.position = $Path2D/PathFollow2D.position
 	$EnemySpawnTimer.set_wait_time($EnemySpawnTimer.wait_time-0.0025)
 	$EnemySpawnTimer.wait_time = clamp($EnemySpawnTimer.wait_time, 0.1, 1)
-	print($EnemySpawnTimer.wait_time)
 	
 	
 
