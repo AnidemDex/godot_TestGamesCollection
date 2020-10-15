@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Fonts/Silver.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://src/scenes/UI/MenuItemContainer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Scripts/MainMenu.gd" type="Script" id=3]
+
+
+[sub_resource type="DynamicFont" id=1]
+size = 90
+font_data = ExtResource( 1 )
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.168627, 0.160784, 0.160784, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+margin_right = 1024.0
+margin_bottom = 600.0
+custom_constants/separation = 20
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 220.0
+custom_constants/margin_top = 120
+
+[node name="GameTitle" type="Label" parent="Menu/VBoxContainer/MarginContainer"]
+margin_top = 120.0
+margin_right = 1024.0
+margin_bottom = 220.0
+custom_fonts/font = SubResource( 1 )
+text = "Titulo asombroso y megaincreible"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/VBoxContainer"]
+margin_top = 240.0
+margin_right = 1024.0
+margin_bottom = 444.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="MenuItemContainer" parent="Menu/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
+margin_left = 404.0
+margin_right = 619.0
+margin_bottom = 204.0
+title = "Titulo"
+world = 1
+[connection signal="button_pressed" from="Menu/VBoxContainer/HBoxContainer/MenuItemContainer" to="." method="_on_MenuItemContainer_button_pressed"]

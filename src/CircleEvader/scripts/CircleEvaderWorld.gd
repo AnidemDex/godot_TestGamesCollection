@@ -1,5 +1,7 @@
 extends Node
 
+signal load_world(scene)
+
 var player_scene = preload("res://src/CircleEvader/Actors/Player.tscn")
 var enemy_scene = preload("res://src/CircleEvader/Actors/Enemy.tscn")
 var puntaje = 0

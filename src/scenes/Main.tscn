@@ -14,4 +14,5 @@ visible = false
 mouse_filter = 2
 
 [node name="WorldScene" type="Spatial" parent="."]
+visible = false
 [connection signal="finished_animation" from="UI/LoadingScreen" to="." method="_on_LoadingScreen_finished_animation"]
