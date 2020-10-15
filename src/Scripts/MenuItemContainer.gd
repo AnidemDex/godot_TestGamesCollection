@@ -27,5 +27,4 @@ func set_description(new_description: String) -> void:
 
 
 func _on_Button_pressed() -> void:
-	print("Boton presionado: "+str(world))
 	emit_signal("button_pressed", world)
