@@ -3,7 +3,8 @@
 [ext_resource path="res://Assets/Fonts/Silver.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Fonts/Silver.tres" type="DynamicFont" id=3]
-[ext_resource path="res://src/Scripts/MenuItemContainer.gd" type="Script" id=4]
+[ext_resource path="res://src/Scripts/menu_item_container.gd" type="Script" id=4]
+
 
 [sub_resource type="DynamicFont" id=1]
 size = 32

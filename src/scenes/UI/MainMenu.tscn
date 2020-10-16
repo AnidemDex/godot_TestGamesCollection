@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Assets/Fonts/Silver.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://src/scenes/UI/MenuItemContainer.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Scripts/MainMenu.gd" type="Script" id=3]
+[ext_resource path="res://src/Scripts/main_menu.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 90
@@ -66,5 +66,6 @@ alignment = 1
 margin_left = 404.0
 margin_right = 619.0
 margin_bottom = 204.0
+title = "Titulo"
 world = 1
 [connection signal="button_pressed" from="Menu/VBoxContainer/HBoxContainer/MenuItemContainer" to="." method="_on_MenuItemContainer_button_pressed"]
