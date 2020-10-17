@@ -23,7 +23,7 @@ var current_world = null
 var current_game_state = GameState.PLAYING
 var _loading_world = null
 var _is_background_loading = false
-onready var world_scene = get_node("/root/Main/WorldScene")
+onready var world_scene = get_node_or_null("/root/Main/WorldScene")
 
 
 func _ready():
