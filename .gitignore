@@ -10,8 +10,8 @@ resources/
 bin/
 ####################
 
-.aseprite
-.txt
+*.aseprite
+*.txt
 
 ####################
 # Windows
