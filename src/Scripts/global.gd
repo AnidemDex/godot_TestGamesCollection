@@ -1,3 +1,4 @@
+tool
 extends Node
 # Script creado para el manejo global de variables
 # y cambios de escenas.
@@ -52,6 +53,7 @@ func update_loadScreen():
 
 func change_world(_scene, background_load: bool = false):
 	#
+	print("Cambiando a: ", _scene)
 	world_scene.visible = false
 	
 	_loading_world = _scene

@@ -16,19 +16,19 @@
 [ext_resource path="res://Assets/rhythm_hero/player/iddle_1/adventurer-idle-00.png" type="Texture" id=14]
 [ext_resource path="res://Assets/rhythm_hero/player/objective/red_circle.png" type="Texture" id=15]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1, 1 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4, 1 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 10, 1 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 5, 1 )
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=5]
 animations = [ {
 "frames": [ ExtResource( 6 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 3 ) ],
 "loop": true,
@@ -55,15 +55,9 @@ position = Vector2( 32, 0 )
 [node name="LeftPosition" type="Position2D" parent="."]
 position = Vector2( -32, 0 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-editor_draw_limits = true
-editor_draw_drag_margin = true
-
 [node name="RightObjective" type="Node2D" parent="."]
 position = Vector2( 56, 0 )
+scale = Vector2( 2, 2 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -72,34 +66,37 @@ __meta__ = {
 texture = ExtResource( 15 )
 
 [node name="PerfectArea" type="Area2D" parent="RightObjective"]
+priority = 3.0
 
 [node name="PerfectCollision" type="CollisionShape2D" parent="RightObjective/PerfectArea"]
 modulate = Color( 0.968627, 1, 0, 1 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="GoodArea" type="Area2D" parent="RightObjective"]
+priority = 2.0
 
 [node name="GoodCollision" type="CollisionShape2D" parent="RightObjective/GoodArea"]
 modulate = Color( 0.0313726, 0, 1, 1 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="NiceArea" type="Area2D" parent="RightObjective"]
+priority = 1.0
 
 [node name="NiceCollision" type="CollisionShape2D" parent="RightObjective/NiceArea"]
 modulate = Color( 0.239216, 0.705882, 0.172549, 0.439216 )
 position = Vector2( -4, 0 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="BadArea" type="Area2D" parent="RightObjective"]
 
 [node name="BadCollision" type="CollisionShape2D" parent="RightObjective/BadArea"]
 modulate = Color( 0.854902, 0.141176, 0.141176, 1 )
 position = Vector2( -19, 0 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="LeftObjective" type="Node2D" parent="."]
 position = Vector2( -56, 0 )
-scale = Vector2( -1, 1 )
+scale = Vector2( -2, 2 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -117,31 +114,33 @@ modulate = Color( 0.968627, 1, 0, 1 )
 position = Vector2( -112, 0 )
 rotation = 3.14159
 scale = Vector2( 1, -1 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="GoodArea" type="Area2D" parent="LeftObjective"]
 position = Vector2( -112, 0 )
 rotation = 3.14159
 scale = Vector2( 1, -1 )
+priority = 2.0
 
 [node name="GoodCollision" type="CollisionShape2D" parent="LeftObjective/GoodArea"]
 modulate = Color( 0.0313726, 0, 1, 1 )
 position = Vector2( -112, 0 )
 rotation = 3.14159
 scale = Vector2( 1, -1 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="NiceArea" type="Area2D" parent="LeftObjective"]
 position = Vector2( -112, 0 )
 rotation = 3.14159
 scale = Vector2( 1, -1 )
+priority = 1.0
 
 [node name="NiceCollision" type="CollisionShape2D" parent="LeftObjective/NiceArea"]
 modulate = Color( 0.239216, 0.705882, 0.172549, 0.439216 )
 position = Vector2( -108, 0 )
 rotation = 3.14159
 scale = Vector2( 1, -1 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="BadArea" type="Area2D" parent="LeftObjective"]
 position = Vector2( -112, 0 )
@@ -153,12 +152,12 @@ modulate = Color( 0.854902, 0.141176, 0.141176, 1 )
 position = Vector2( -93, 0 )
 rotation = 3.14159
 scale = Vector2( 1, -1 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="PlayerContainer" type="Node2D" parent="."]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="PlayerContainer"]
-frames = SubResource( 1 )
+frames = SubResource( 5 )
 animation = "iddle_1"
 frame = 1
 [connection signal="area_entered" from="RightObjective/PerfectArea" to="." method="_on_PerfectArea_area_entered"]
@@ -166,7 +165,11 @@ frame = 1
 [connection signal="area_entered" from="RightObjective/NiceArea" to="." method="_on_NiceArea_area_entered"]
 [connection signal="area_entered" from="RightObjective/BadArea" to="." method="_on_BadArea_area_entered"]
 [connection signal="area_entered" from="LeftObjective/PerfectArea" to="." method="_on_PerfectArea_area_entered"]
+[connection signal="area_exited" from="LeftObjective/PerfectArea" to="." method="_on_HitArea_area_exited"]
 [connection signal="area_entered" from="LeftObjective/GoodArea" to="." method="_on_GoodArea_area_entered"]
+[connection signal="area_exited" from="LeftObjective/GoodArea" to="." method="_on_HitArea_area_exited"]
 [connection signal="area_entered" from="LeftObjective/NiceArea" to="." method="_on_NiceArea_area_entered"]
+[connection signal="area_exited" from="LeftObjective/NiceArea" to="." method="_on_HitArea_area_exited"]
 [connection signal="area_entered" from="LeftObjective/BadArea" to="." method="_on_BadArea_area_entered"]
+[connection signal="area_exited" from="LeftObjective/BadArea" to="." method="_on_BadArea_area_exited"]
 [connection signal="animation_finished" from="PlayerContainer/AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

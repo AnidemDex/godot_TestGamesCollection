@@ -5,7 +5,6 @@
 [ext_resource path="res://Assets/Fonts/Silver.tres" type="DynamicFont" id=3]
 [ext_resource path="res://src/Scripts/menu_item_container.gd" type="Script" id=4]
 
-
 [sub_resource type="DynamicFont" id=1]
 size = 32
 font_data = ExtResource( 1 )
@@ -18,7 +17,6 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-title = null
 
 [node name="MinSize" type="NinePatchRect" parent="."]
 margin_left = 15.0

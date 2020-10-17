@@ -3,18 +3,13 @@ extends MarginContainer
 
 signal button_pressed
 
-export(String) onready var title  = "Titulo" setget set_button_title
+export(String) var title  = "Titulo" setget set_button_title
 export(String, MULTILINE) var description = "Una descripción hilarante" setget set_description
+
 export(GLOBAL.SceneName) var world = GLOBAL.SceneName.MAIN_MENU
 
 var is_ready = false
 
-func _ready() -> void:
-	title = $VBoxContainer/Button.text
-	property_list_changed_notify()
-	description = $VBoxContainer/Label.text
-	property_list_changed_notify()
-	
 
 func set_button_title(new_title: String) -> void:
 	$VBoxContainer/Button.text = new_title

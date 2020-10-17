@@ -6,6 +6,7 @@ enum NoteValue {
 	GOOD, 
 	NICE, 
 	BAD,
+	MISS
 	}
 
 var direction = Vector2.ZERO
@@ -48,18 +49,19 @@ func _input(event: InputEvent) -> void:
 					
 				NoteValue.GOOD:
 					# Es una nota casi perfecta
-					current_note.destroy(NoteValue.PERFECT)
+					current_note.destroy(NoteValue.GOOD)
 					
 				NoteValue.NICE:
 					# Es una nota buena
-					current_note.destroy(NoteValue.PERFECT)
+					current_note.destroy(NoteValue.NICE)
 					
 				NoteValue.BAD:
 					# Fallo brutalmente la nota
-					current_note.destroy(NoteValue.PERFECT)
+					current_note.destroy(NoteValue.BAD)
 					
 				_:
 					pass
+			current_note = null
 		# TODO: aumentar la puntuacion despues de destruir
 
 	if event.is_action_released("key_left") or event.is_action_released("key_right"):
@@ -96,3 +98,15 @@ func _on_NiceArea_area_entered(area: Area2D) -> void:
 func _on_BadArea_area_entered(area: Area2D) -> void:
 	if area.is_in_group("music_notes"):
 		note_score = NoteValue.BAD
+
+
+func _on_HitArea_area_exited(area):
+	if area.is_in_group("music_notes"):
+		note_score = NoteValue.NONE
+
+
+func _on_BadArea_area_exited(area):
+	if area.is_in_group("music_notes"):
+		note_score = NoteValue.MISS
+		area.destroy(note_score)
+	pass # Replace with function body.
