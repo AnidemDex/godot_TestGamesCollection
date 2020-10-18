@@ -17,8 +17,6 @@ font_data = SubResource( 2 )
 ]]
 script = ExtResource( 2 )
 
-[node name="Timer" type="Timer" parent="."]
-
 [node name="Circle32x32" type="Sprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 1 )
@@ -42,5 +40,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Tween" type="Tween" parent="Node2D"]
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

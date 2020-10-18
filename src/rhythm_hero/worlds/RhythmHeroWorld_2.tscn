@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/rhythm_hero/actors/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/rhythm_hero/scripts/rhythm_hero_world.gd" type="Script" id=2]
-[ext_resource path="res://Assets/rhythm_hero/music/test_song.ogg" type="AudioStream" id=3]
+[ext_resource path="res://Assets/rhythm_hero/music/test_song_2.ogg" type="AudioStream" id=3]
 [ext_resource path="res://src/rhythm_hero/scenes/conductor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/rhythm_hero/background/stringstar_fields/background_2.png" type="Texture" id=5]
 [ext_resource path="res://src/rhythm_hero/scenes/enemy_objective.tscn" type="PackedScene" id=6]
@@ -236,6 +236,8 @@ font_data = SubResource( 2 )
 
 [node name="RhythmHeroWorld_1" type="Node2D"]
 script = ExtResource( 2 )
+start_beat = 26
+stop_beat = 226
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -10
@@ -272,7 +274,7 @@ tile_set = SubResource( 1 )
 cell_size = Vector2( 16, 16 )
 cell_tile_origin = 2
 format = 1
-tile_data = PoolIntArray( 851969, 12, 0, 852000, 12, 0, 1179666, 1, 0, 1310728, 4, 0, 1310733, 2, 0, 1310742, 2, 0, 1376274, 6, 0, 1376284, 3, 0, 1507327, 14, 0, 1441800, 13, 0, 1441802, 14, 0, 1441804, 13, 0, 1441806, 14, 0, 1441808, 14, 0, 1441814, 14, 0, 1441816, 13, 0, 1441818, 14, 0, 1441820, 15, 0, 1441821, 13, 0, 1441823, 15, 0, 1441831, 15, 0, 1441832, 15, 0 )
+tile_data = PoolIntArray( 851969, 12, 0, 851985, 12, 0, 1310728, 4, 0, 1310732, 5, 0, 1310733, 2, 0, 1310742, 2, 0, 1376267, 9, 0, 1376274, 6, 0, 1376283, 9, 0, 1376284, 6, 0, 1507327, 14, 0, 1441800, 13, 0, 1441802, 14, 0, 1441804, 13, 0, 1441806, 14, 0, 1441808, 14, 0, 1441814, 14, 0, 1441816, 13, 0, 1441818, 14, 0, 1441820, 15, 0, 1441821, 13, 0, 1441823, 15, 0, 1441831, 15, 0, 1441832, 15, 0 )
 
 [node name="EnemySpawnerLeft" type="Position2D" parent="."]
 position = Vector2( 0, 334 )
@@ -282,7 +284,8 @@ position = Vector2( 640, 334 )
 
 [node name="Conductor" parent="." instance=ExtResource( 4 )]
 stream = ExtResource( 3 )
-bpm = 103
+bpm = 135
+measures = 8
 
 [node name="EnemyPointer" type="Position2D" parent="."]
 position = Vector2( 320, 334 )
@@ -317,9 +320,9 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/CenterContainer"]
 margin_left = 65.0
-margin_top = 42.0
+margin_top = 41.0
 margin_right = 234.0
-margin_bottom = 325.0
+margin_bottom = 324.0
 
 [node name="NotasP" type="HBoxContainer" parent="UI/CenterContainer/VBoxContainer"]
 margin_right = 169.0

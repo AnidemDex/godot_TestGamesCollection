@@ -6,6 +6,9 @@ extends Node
 enum SceneName {
 	MAIN_MENU,
 	CIRCLE_EVADER,
+	RHYTHM_HERO_MAINMENU,
+	RHYTHM_HERO_1,
+	RHYTHM_HERO_2,
 	}
 
 enum GameState {
@@ -16,6 +19,9 @@ enum GameState {
 const SCENES = [
 	"res://src/scenes/UI/MainMenu.tscn",
 	"res://src/CircleEvader/Worlds/CircleEvaderWorld.tscn",
+	"res://src/rhythm_hero/scenes/RhythmHeroMenu.tscn",
+	"res://src/rhythm_hero/worlds/RhythmHeroWorld.tscn",
+	"res://src/rhythm_hero/worlds/RhythmHeroWorld_2.tscn",
 	]
 
 var resource: ResourceQueue = preload("res://src/Scripts/resource_queue.gd").new()

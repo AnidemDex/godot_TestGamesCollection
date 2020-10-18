@@ -4,4 +4,7 @@
 font_path = "res://Assets/Fonts/HeartbitXX2Px.ttf"
 
 [resource]
+size = 64
+outline_size = 3
+outline_color = Color( 0.203922, 0.0156863, 0.376471, 1 )
 font_data = SubResource( 1 )
