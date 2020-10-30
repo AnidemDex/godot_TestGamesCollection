@@ -25,10 +25,10 @@ margin_bottom = 441.0
 [node name="CircleEvaderSelector" parent="." instance=ExtResource( 2 )]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -139.0
-margin_top = 260.0
-margin_right = 0.0
-margin_bottom = 441.0
+margin_left = -345.28
+margin_top = 262.753
+margin_right = -206.28
+margin_bottom = 443.753
 
 [node name="Background" type="ColorRect" parent="."]
 anchor_top = 1.0

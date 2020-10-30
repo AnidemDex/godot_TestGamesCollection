@@ -30,6 +30,7 @@ margin_bottom = -27.0
 rect_rotation = -7.05344
 color = Color( 0.239216, 0.227451, 0.227451, 1 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 

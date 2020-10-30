@@ -11,6 +11,12 @@ onready var game: Array = [
 onready var tween = $Tween
 
 func _ready():
+	for item in game:
+		item.margin_left = -139
+		item.margin_right = 0
+		item.margin_top = 260
+		item.margin_bottom = -441
+	
 	put_first_selector()
 	
 
