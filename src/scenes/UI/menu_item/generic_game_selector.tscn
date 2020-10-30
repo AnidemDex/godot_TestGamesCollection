@@ -9,6 +9,7 @@
 [node name="GameSelector" type="Control"]
 margin_right = 139.0
 margin_bottom = 181.0
+rect_scale = Vector2( 1.2, 1.2 )
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_group_": true,
@@ -27,7 +28,7 @@ margin_bottom = 0.0
 anchor_right = 1.0
 margin_left = 8.33385
 margin_top = -4.36894
-margin_right = 277.334
+margin_right = 7.33385
 margin_bottom = 79.6311
 title = ""
 

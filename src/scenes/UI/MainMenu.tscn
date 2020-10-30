@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/scenes/UI/menu_item/game_selector.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/scenes/UI/menu_item/right_menu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Scripts/main_menu.gd" type="Script" id=3]
 
 [node name="MainMenu" type="Control"]
@@ -34,8 +35,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="RightMenu" parent="." instance=ExtResource( 2 )]
+margin_left = 464.066
+margin_top = 166.966
+margin_right = 603.066
+margin_bottom = 347.966
+
 [node name="GameSelector" parent="." instance=ExtResource( 1 )]
-margin_left = -179.682
-margin_top = 170.179
-margin_right = 179.318
-margin_bottom = 392.179
+margin_left = -255.876
+margin_top = 125.6
+margin_right = 163.124
+margin_bottom = 383.6

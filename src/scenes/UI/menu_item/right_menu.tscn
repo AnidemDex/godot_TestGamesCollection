@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/scenes/UI/menu_item/lower_button.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/scenes/UI/menu_item/creddits_button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/scenes/UI/menu_item/upper_button.tscn" type="PackedScene" id=3]
+
+[node name="RightMenu" type="Control"]
+margin_right = 104.0
+margin_bottom = 99.0
+rect_min_size = Vector2( 139, 181 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 12.0
+margin_right = 139.0
+margin_bottom = 60.0
+alignment = 2
+
+[node name="UpperButton" parent="VBoxContainer/HBoxContainer3" instance=ExtResource( 3 )]
+anchor_left = 0.0
+anchor_right = 0.0
+margin_left = 32.0
+margin_right = 139.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 64.0
+margin_right = 139.0
+margin_bottom = 127.0
+alignment = 2
+
+[node name="CreditsButton" parent="VBoxContainer/HBoxContainer2" instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_right = 0.0
+margin_left = 21.0
+margin_right = 139.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 131.0
+margin_right = 139.0
+margin_bottom = 181.0
+alignment = 2
+
+[node name="LowerButton" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_right = 0.0
+margin_left = 13.0
+margin_right = 139.0

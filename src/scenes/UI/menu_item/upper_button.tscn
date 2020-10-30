@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/main_menu/option_menu/btn_upper_disabledl.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Fonts/Silver.tres" type="DynamicFont" id=2]
+
+[node name="UpperButton" type="TextureButton"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -107.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 107, 48 )
+disabled = true
+texture_disabled = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 37.0
+custom_fonts/font = ExtResource( 2 )
