@@ -17,8 +17,8 @@ func _ready():
 
 func _process(_delta):
 	if Engine.editor_hint:
-		$VBoxContainer/Button.text = title
-		$VBoxContainer/Label.text = description
+		$VBoxContainer/Button.text = str(title)
+		$VBoxContainer/Label.text = str(description)
 	
 func set_button_title(new_title: String) -> void:
 	title = new_title

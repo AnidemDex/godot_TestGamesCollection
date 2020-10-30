@@ -7,11 +7,11 @@
 font_path = "res://Assets/Fonts/HeartbitXX2Px.ttf"
 
 [sub_resource type="DynamicFont" id=2]
-size = 48
+size = 64
 font_data = SubResource( 1 )
 
 [node name="GameTitle" type="NinePatchRect"]
-margin_right = 314.0
+margin_right = 408.0
 margin_bottom = 84.0
 rect_min_size = Vector2( 32, 32 )
 rect_scale = Vector2( 0.25, 0.25 )

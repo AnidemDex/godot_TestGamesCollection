@@ -10,7 +10,7 @@ font_path = "res://Assets/Fonts/HeartbitXX2Px.ttf"
 [sub_resource type="DynamicFont" id=2]
 font_data = SubResource( 1 )
 
-[node name="TextureButton" type="TextureButton"]
+[node name="NextGameButton" type="TextureButton"]
 margin_left = 2.0
 margin_top = 3.0
 margin_right = 44.0

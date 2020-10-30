@@ -5,6 +5,9 @@ export(String) var title = "----Titulo----" setget set_title
 var offset = Vector2(32,32)
 
 func _ready():
+	if title != null:
+		$Title.set_text(title)
+		property_list_changed_notify()
 	rect_size = $Title.rect_size+offset
 
 
