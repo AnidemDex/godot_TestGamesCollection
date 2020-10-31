@@ -30,19 +30,13 @@ func put_first_selector():
 	emit_signal("item_finished_in", 0)
 
 func change_to_next_selector():
-	emit_signal("item_started_out")
 	animate_out()
 	yield(tween, "tween_all_completed")
 	
-	game[game_index].margin_left = -139
-	game[game_index].margin_right = 0
-	game[game_index].margin_top = 260
-	game[game_index].margin_bottom = -441
+	_put_item_on_start_point()
 	
 	game_index = game_index + 1 if game_index < game.size()-1 else 0	
 	animate_in()
-	yield(tween, "tween_all_completed")
-	emit_signal("item_finished_in", game_index)
 
 
 func animate_in(index:int = game_index):
@@ -65,9 +59,13 @@ func animate_in(index:int = game_index):
 	)
 	
 	tween.start()
+	yield(tween, "tween_all_completed")
+	emit_signal("item_finished_in", game_index)
 
 
 func animate_out():
+	emit_signal("item_started_out")
+	
 	tween.interpolate_property(
 		game[game_index], 
 		"margin_left", 
@@ -89,4 +87,11 @@ func animate_out():
 		)
 
 	tween.start()
+	yield(tween, "tween_all_completed")
+	_put_item_on_start_point()
 
+func _put_item_on_start_point():
+	game[game_index].margin_left = -139
+	game[game_index].margin_right = 0
+	game[game_index].margin_top = 260
+	game[game_index].margin_bottom = -441

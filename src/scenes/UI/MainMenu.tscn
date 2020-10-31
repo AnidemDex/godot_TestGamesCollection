@@ -103,6 +103,8 @@ anchor_bottom = 1.0
 margin_top = -14.0
 text = "Test Games Collection"
 align = 2
+[connection signal="back_button_pressed" from="GameInfoPanel" to="." method="_on_GameInfoPanel_back_button_pressed"]
 [connection signal="change_world_request" from="GameInfoPanel" to="." method="_on_GameInfoPanel_change_world_request"]
+[connection signal="mid_button_pressed" from="RightMenu" to="." method="_on_RightMenu_mid_button_pressed"]
 [connection signal="item_finished_in" from="GameSelector" to="GameInfoPanel" method="animate_in"]
 [connection signal="item_started_out" from="GameSelector" to="GameInfoPanel" method="animate_out"]

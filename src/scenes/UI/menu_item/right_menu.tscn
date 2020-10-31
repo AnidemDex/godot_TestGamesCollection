@@ -45,4 +45,6 @@ margin_right = 300.0
 margin_bottom = 177.0
 
 [node name="Tween" type="Tween" parent="."]
+[connection signal="pressed" from="UpperButton" to="." method="_on_UpperButton_pressed"]
 [connection signal="pressed" from="CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="pressed" from="LowerButton" to="." method="_on_LowerButton_pressed"]

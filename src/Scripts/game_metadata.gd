@@ -1,5 +1,13 @@
 extends Node
 
+enum GameInfo {
+	CREDITS = -2,
+}
+
+const Credits = {
+	"dev": "Desarrollado por AnidemDex (@AnidemDex) con ayuda de Candy (@CandyToneky)",
+}
+
 const CircleEvader = {
 	"info": "Mueve el mouse y evita los triangulos"
 }

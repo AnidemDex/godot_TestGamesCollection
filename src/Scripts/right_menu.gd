@@ -1,6 +1,8 @@
 extends Control
 
+signal top_button_pressed
 signal mid_button_pressed
+signal bot_button_pressed
 
 const BTN_TOP_POSITION = Vector2(32, 12)
 const BTN_MID_POSITION = Vector2(21, 64)
@@ -57,3 +59,11 @@ func animate_out():
 
 func _on_CreditsButton_pressed() -> void:
 	emit_signal("mid_button_pressed")
+
+
+func _on_UpperButton_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_LowerButton_pressed() -> void:
+	pass # Replace with function body.
