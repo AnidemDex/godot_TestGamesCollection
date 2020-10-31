@@ -28,6 +28,7 @@ config/icon="res://icon.png"
 [autoload]
 
 GLOBAL="*res://src/Scripts/global.gd"
+GAMEMETADATA="*res://src/Scripts/game_metadata.gd"
 
 [display]
 

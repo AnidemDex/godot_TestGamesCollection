@@ -1,0 +1,120 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Fonts/heartbit2x.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/main_menu/next_button/normal.png" type="Texture" id=2]
+[ext_resource path="res://Assets/main_menu/next_button/pressed.png" type="Texture" id=3]
+[ext_resource path="res://Assets/main_menu/next_button/hover.png" type="Texture" id=4]
+[ext_resource path="res://src/Scripts/game_info.gd" type="Script" id=5]
+
+[node name="GameInfoPanel" type="Control"]
+margin_right = 240.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 240, 140 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="OrangeLine" type="ColorRect" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 18.0
+margin_right = -4.00002
+margin_bottom = -90.0
+color = Color( 1, 0.517647, 0.14902, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WhitePanel" type="ColorRect" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 5.0
+margin_right = -20.0
+margin_bottom = -10.0
+color = Color( 0.94902, 0.94902, 0.94902, 0.901961 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/WhitePanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -18.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "No deberias de poder leer esto ._.xD"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+max_lines_visible = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayButton" type="TextureButton" parent="Panel/WhitePanel"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -94.0
+margin_top = -32.0
+margin_right = -9.00002
+margin_bottom = 12.0
+rect_rotation = 2.90281
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/WhitePanel/PlayButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -4.0
+margin_top = 3.0
+margin_right = -5.0
+margin_bottom = -7.0
+custom_fonts/font = ExtResource( 1 )
+text = "Jugar"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -141.0
+margin_bottom = -141.0
+color = Color( 0.239216, 0.227451, 0.227451, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+border_color = Color( 0, 0.203922, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Panel/WhitePanel/PlayButton" to="." method="_on_PlayButton_pressed"]
