@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/scenes/UI/menu_item/rhytm_hero_selector.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/scenes/UI/menu_item/circle_evader_selector.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Scripts/game_selector.gd" type="Script" id=3]
+[ext_resource path="res://src/scenes/UI/menu_item/fall_game_selector.tscn" type="PackedScene" id=4]
+
+[node name="GameSelector" type="Control"]
+margin_left = -169.0
+margin_top = 8.0
+margin_right = 250.0
+margin_bottom = 265.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CircleEvaderSelector" parent="." instance=ExtResource( 2 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -139.0
+margin_right = 0.0
+
+[node name="FallGameSelector" parent="." instance=ExtResource( 4 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -139.0
+margin_right = 0.0
+
+[node name="RhythmHeroSelector" parent="." instance=ExtResource( 1 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -139.0
+margin_right = 0.0
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -23.0
+margin_top = -32.0
+margin_right = 31.0
+margin_bottom = 32.0
+color = Color( 0.168627, 0.160784, 0.160784, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]

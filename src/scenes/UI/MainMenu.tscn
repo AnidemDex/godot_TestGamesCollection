@@ -1,19 +1,18 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Assets/Fonts/Silver.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://src/scenes/UI/menu_item/game_selector.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/scenes/UI/menu_item/right_menu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Scripts/main_menu.gd" type="Script" id=3]
-[ext_resource path="res://Assets/Fonts/Silver.tres" type="DynamicFont" id=4]
-[ext_resource path="res://src/Scripts/menu_item_container.gd" type="Script" id=5]
-[ext_resource path="res://src/scenes/UI/MenuItemContainer.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/scenes/UI/menu_item/game_info.tscn" type="PackedScene" id=4]
 
-[sub_resource type="DynamicFont" id=1]
-size = 64
-font_data = ExtResource( 1 )
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://Assets/Fonts/HeartbitXX2Px.ttf"
 
 [sub_resource type="DynamicFont" id=2]
-size = 32
-font_data = ExtResource( 1 )
+size = 128
+outline_size = 2
+outline_color = Color( 0.298039, 0.341176, 0.980392, 1 )
+font_data = SubResource( 1 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -32,104 +31,80 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Menu" type="MarginContainer" parent="."]
+[node name="Background2" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 69.0
+margin_top = 83.0
+margin_right = -99.0
+margin_bottom = -27.0
+rect_rotation = -7.05344
+color = Color( 0.239216, 0.227451, 0.227451, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="GameInfoPanel" parent="." instance=ExtResource( 4 )]
+margin_left = 220.0
+margin_top = 205.0
+margin_right = 460.0
+margin_bottom = 345.0
+
+[node name="RightMenu" parent="." instance=ExtResource( 2 )]
+margin_left = 464.066
+margin_top = 166.966
+margin_right = 603.066
+margin_bottom = 347.966
+
+[node name="GameSelector" parent="." instance=ExtResource( 1 )]
+margin_left = -255.876
+margin_top = 125.6
+margin_right = 163.124
+margin_bottom = 383.6
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 345.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
-margin_right = 640.0
-margin_bottom = 360.0
-custom_constants/separation = 20
+[node name="Title" type="Control" parent="."]
+anchor_right = 1.0
+margin_left = 153.0
+margin_top = -8.0
+margin_right = -43.0
+margin_bottom = 111.0
+rect_rotation = 2.58631
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="MarginContainer" type="MarginContainer" parent="Menu/VBoxContainer"]
-margin_right = 640.0
-margin_bottom = 112.0
-custom_constants/margin_top = 40
-
-[node name="GameTitle" type="Label" parent="Menu/VBoxContainer/MarginContainer"]
-margin_top = 40.0
-margin_right = 640.0
-margin_bottom = 112.0
-custom_fonts/font = SubResource( 1 )
-text = "Titulo asombroso y megaincreible"
+[node name="Label" type="Label" parent="Title"]
+anchor_right = 1.0
+margin_left = -0.0451202
+margin_top = -0.998981
+margin_right = -0.045105
+margin_bottom = 103.001
+custom_fonts/font = SubResource( 2 )
+text = "GODOT"
 align = 1
 valign = 1
-autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Menu/VBoxContainer"]
-margin_top = 132.0
-margin_right = 640.0
-margin_bottom = 336.0
-custom_constants/separation = 10
-alignment = 1
-
-[node name="MenuItemContainer" type="MarginContainer" parent="Menu/VBoxContainer/HBoxContainer"]
-margin_left = 100.0
-margin_right = 315.0
-margin_bottom = 204.0
-custom_constants/margin_left = 15
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-title = "Circle Evader"
-description = "Evita los triangulos con el mouse"
-world = 1
-
-[node name="MinSize" type="NinePatchRect" parent="Menu/VBoxContainer/HBoxContainer/MenuItemContainer"]
-margin_left = 15.0
-margin_right = 215.0
-margin_bottom = 204.0
-patch_margin_left = 100
-patch_margin_right = 100
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/VBoxContainer/HBoxContainer/MenuItemContainer"]
-margin_left = 15.0
-margin_right = 215.0
-margin_bottom = 204.0
-custom_constants/separation = 10
-alignment = 1
-
-[node name="Button" type="Button" parent="Menu/VBoxContainer/HBoxContainer/MenuItemContainer/VBoxContainer"]
-margin_right = 200.0
-margin_bottom = 43.0
-custom_fonts/font = SubResource( 2 )
-text = "Circle Evader"
-
-[node name="Label" type="Label" parent="Menu/VBoxContainer/HBoxContainer/MenuItemContainer/VBoxContainer"]
-margin_top = 53.0
-margin_right = 200.0
-margin_bottom = 130.0
-custom_fonts/font = ExtResource( 4 )
-text = "Evita los triangulos con el mouse"
-align = 1
-autowrap = true
-
-[node name="CenterContainer" type="CenterContainer" parent="Menu/VBoxContainer/HBoxContainer/MenuItemContainer/VBoxContainer"]
-margin_top = 140.0
-margin_right = 200.0
-margin_bottom = 204.0
-
-[node name="TextureRect" type="TextureRect" parent="Menu/VBoxContainer/HBoxContainer/MenuItemContainer/VBoxContainer/CenterContainer"]
-margin_left = 68.0
-margin_right = 132.0
-margin_bottom = 64.0
-texture = ExtResource( 2 )
-stretch_mode = 2
-
-[node name="MenuItemContainer2" parent="Menu/VBoxContainer/HBoxContainer" instance=ExtResource( 6 )]
-margin_left = 325.0
-margin_right = 540.0
-margin_bottom = 204.0
-title = "Rhythm Hero"
-description = "Sigue el ritmo de la musica"
-world = 2
-[connection signal="button_pressed" from="Menu/VBoxContainer/HBoxContainer/MenuItemContainer" to="." method="_on_MenuItemContainer_button_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/HBoxContainer/MenuItemContainer/VBoxContainer/Button" to="Menu/VBoxContainer/HBoxContainer/MenuItemContainer" method="_on_Button_pressed"]
-[connection signal="button_pressed" from="Menu/VBoxContainer/HBoxContainer/MenuItemContainer2" to="." method="_on_MenuItemContainer_button_pressed"]
+[node name="Label2" type="Label" parent="Title"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -14.0
+text = "Test Games Collection"
+align = 2
+[connection signal="back_button_pressed" from="GameInfoPanel" to="." method="_on_GameInfoPanel_back_button_pressed"]
+[connection signal="change_world_request" from="GameInfoPanel" to="." method="_on_GameInfoPanel_change_world_request"]
+[connection signal="mid_button_pressed" from="RightMenu" to="." method="_on_RightMenu_mid_button_pressed"]
+[connection signal="item_finished_in" from="GameSelector" to="GameInfoPanel" method="animate_in"]
+[connection signal="item_started_out" from="GameSelector" to="GameInfoPanel" method="animate_out"]
