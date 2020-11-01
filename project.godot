@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "LevelGenerator",
+"language": "GDScript",
+"path": "res://src/caida_procedural/scripts/level_generator.gd"
+}, {
 "base": "Reference",
 "class": "ResourceQueue",
 "language": "GDScript",
 "path": "res://src/Scripts/resource_queue.gd"
 } ]
 _global_script_class_icons={
+"LevelGenerator": "",
 "ResourceQueue": ""
 }
 
