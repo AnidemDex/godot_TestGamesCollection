@@ -7,7 +7,10 @@ export(int) var gravity: int = 264
 export(float, 0.0, 1.0) var friction = 0.5
 export(float, 0.0, 1.0) var acceleration = 0.25
 
+export(int, 1, 8) var bullet_impulse = 8
+
 var actual_speed = Vector2.ZERO
+var _bullet_impulse = false
 
 func _physics_process(delta):
 	var direction = get_direction()
@@ -40,6 +43,9 @@ func calculate_speed(
 		speed.y = jump_speed * direction.y
 	if is_jump_interrupted:
 		speed.y = 0.0
+	if _bullet_impulse:
+		speed.y = -jump_speed/bullet_impulse
+		_bullet_impulse = false
 	
 	return speed
 
@@ -53,3 +59,7 @@ func get_direction() -> Vector2:
 		)
 
 	return Vector2(x, y)
+
+
+func _on_BulletGenerator_bullet_generated():
+	_bullet_impulse = true

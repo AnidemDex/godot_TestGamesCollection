@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Assets/caida_procedural/player/fall_player.png" type="Texture" id=1]
 [ext_resource path="res://src/caida_procedural/scripts/player.gd" type="Script" id=2]
 [ext_resource path="res://src/caida_procedural/scripts/player_animations.gd" type="Script" id=3]
+[ext_resource path="res://src/caida_procedural/scripts/bullet_generator.gd" type="Script" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -62,7 +63,7 @@ animations = [ {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
 "loop": false,
 "name": "hit",
-"speed": 15.0
+"speed": 40.0
 }, {
 "frames": [ SubResource( 8 ) ],
 "loop": true,
@@ -88,6 +89,7 @@ height = 6.8453
 extents = Vector2( 3.373, 1.85866 )
 
 [node name="Player" type="KinematicBody2D"]
+collision_layer = 2
 script = ExtResource( 2 )
 
 [node name="PlayerAnimations" type="AnimatedSprite" parent="."]
@@ -108,3 +110,10 @@ shape = SubResource( 15 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.2, 0.2 )
+
+[node name="BulletGenerator" type="Position2D" parent="."]
+position = Vector2( 0, 5 )
+script = ExtResource( 4 )
+[connection signal="animation_finished" from="PlayerAnimations" to="PlayerAnimations" method="_on_PlayerAnimations_animation_finished"]
+[connection signal="bullet_generated" from="BulletGenerator" to="PlayerAnimations" method="_on_BulletGenerator_bullet_generated"]
+[connection signal="bullet_generated" from="BulletGenerator" to="." method="_on_BulletGenerator_bullet_generated"]
