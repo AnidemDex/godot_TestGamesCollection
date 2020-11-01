@@ -6,7 +6,10 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3.20318, 1.4166 )
 
-[node name="Bullet" type="Area2D"]
+[node name="Bullet" type="Area2D" groups=[
+"bullets",
+"cosas_que_golpean",
+]]
 collision_layer = 2
 script = ExtResource( 1 )
 __meta__ = {

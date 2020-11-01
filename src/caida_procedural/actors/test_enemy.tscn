@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/caida_procedural/scripts/enemy_behaviour.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="RectangleShape2D" id=2]
+
+[node name="EnemyBehaviour" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "No olvides darle un padre del tipo rigidbody a este nodo"
+}
+
+[node name="DamageZone" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+__meta__ = {
+"_editor_description_": "Te hacen daño"
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageZone"]
+modulate = Color( 1, 0, 0, 1 )
+shape = SubResource( 1 )
+
+[node name="HitZone" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitZone"]
+modulate = Color( 0.360784, 0.0588235, 0.894118, 1 )
+position = Vector2( 20, 0 )
+shape = SubResource( 2 )
+__meta__ = {
+"_editor_description_": "Tomas daño"
+}
+[connection signal="area_entered" from="DamageZone" to="." method="_on_DamageZone_area_entered"]
+[connection signal="area_entered" from="HitZone" to="." method="_on_HitZone_area_entered"]

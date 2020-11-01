@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/Scripts/ShakeCamera2D.gd" type="Script" id=1]
+
+[node name="ShakeCamera2D" type="Camera2D"]
+current = true
+zoom = Vector2( 0.2, 0.2 )
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource( 1 )
