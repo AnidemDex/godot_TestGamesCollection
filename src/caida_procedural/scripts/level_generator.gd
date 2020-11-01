@@ -38,9 +38,9 @@ func generate():
 	pass
 
 func _generate_perimeter():
-	for x in [start_point.x, size.x]:
-		for y in range(0, size.y):
-			_tilemap.set_cell(x, y, 3)
+	for y in range(0, size.y):
+		_tilemap.set_cell(start_point.x, y, 1)
+		_tilemap.set_cell(size.x, y, 4)
 
 func _generate_inner():
 	pass
