@@ -2,7 +2,8 @@
 
 [ext_resource path="res://src/caida_procedural/scenes/world_enviorment.tres" type="TileSet" id=1]
 
-[node name="Enviorment" type="TileMap"]
+[node name="SolidEnviorment" type="TileMap"]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
+tile_data = PoolIntArray( 917515, 7, 0, 917516, 7, 0, 917517, 7, 0, 983050, 7, 0, 983052, 7, 0, 1048586, 7, 0 )
