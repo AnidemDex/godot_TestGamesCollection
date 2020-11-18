@@ -72,10 +72,10 @@ func _on_BulletGenerator_bullet_generated():
 	emit_signal("bullet_generated")
 
 
-func _on_StompDetector_area_entered(area: Area2D):
+func _on_StompDetector_area_entered(_area: Area2D):
 	_enemy_stomped = true
 	
 
 
-func _on_StompDetector_area_exited(area: Area2D):
+func _on_StompDetector_area_exited(_area: Area2D):
 	_enemy_stomped = false

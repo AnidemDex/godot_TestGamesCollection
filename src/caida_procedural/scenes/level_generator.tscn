@@ -9,11 +9,6 @@ __meta__ = {
 "_editor_description_": "Genera los puntos
 Luego pon cada tile de forma individual"
 }
-floor_probability = 18.0
 
 [node name="SolidEnviorment" parent="." instance=ExtResource( 2 )]
 tile_data = PoolIntArray(  )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 282.226, 537.506 )
-zoom = Vector2( 3, 3 )

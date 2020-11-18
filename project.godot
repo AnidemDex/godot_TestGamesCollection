@@ -9,18 +9,12 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node2D",
-"class": "LevelGenerator",
-"language": "GDScript",
-"path": "res://src/caida_procedural/scripts/level_configurator.gd"
-}, {
 "base": "Reference",
 "class": "ResourceQueue",
 "language": "GDScript",
 "path": "res://src/Scripts/resource_queue.gd"
 } ]
 _global_script_class_icons={
-"LevelGenerator": "",
 "ResourceQueue": ""
 }
 
@@ -40,8 +34,6 @@ GAMEMETADATA="*res://src/Scripts/game_metadata.gd"
 
 window/size/width=640
 window/size/height=360
-window/size/test_width=1280
-window/size/test_height=720
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 

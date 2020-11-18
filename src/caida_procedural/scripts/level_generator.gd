@@ -1,5 +1,8 @@
-
+tool
 extends Node2D
+
+signal started
+signal finished
 
 enum Tile {
 	EMPTY,
@@ -8,62 +11,202 @@ enum Tile {
 	FLOOR,
 	WALL,
 	RIGHT_LIMIT,
+	BOX,
 }
 
-export(float, 1, 100, 0.1) var floor_probability: float = 50
-export var start_point : Vector2 = Vector2.ZERO
-export var end_point : Vector2 = Vector2(9,64)
-export(OpenSimplexNoise) var simple_noise
+export(float, 1, 100, 0.1) var floor_probability: float = 18
+export var start_point : Vector2 = Vector2.ZERO setget _set_start_point
+export var end_point : Vector2 = Vector2(9,64) setget _set_end_point
+export var smooth_times : int = 1
 
+#-1,-1[5]	0,-1[6]	1,-1[7]
+#-1,0 [3]	0,0 [x]	1,0 [4]
+#-1,1 [0]	0,1 [1]	1,1 [2]
 var directions = [
-	Vector2(1,0), Vector2(1,1), Vector2(0,1), 
-	Vector2(-1,0), Vector2(-1,-1), Vector2(0,-1), 
-	Vector2(1,-1), Vector2(-1,1)]
+	Vector2(-1,1), Vector2(0,1), Vector2(1,1), 
+	Vector2(-1,0), Vector2(1,0), Vector2(-1,-1), 
+	Vector2(0,-1), Vector2(1,-1)
+	]
 
 onready var solid_enviorment: TileMap = $SolidEnviorment
 
 func _ready() -> void:
 	randomize()
-	_check_simple_noise()
+	update()
+	var _error_start = connect("started", owner, "on_LevelGenerator_started")
+	var _error_finish = connect("finished", owner, "on_LevelGenerator_finished")
 
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("key_c"):
-		_smooth_map()
-		
-	if Input.is_action_just_pressed("key_z"):
-		_make_map()
+func _draw() -> void:
+	# Dibuja dentro del editor los limites del nivel
+	if Engine.editor_hint:
+		var level_size:Rect2 = Rect2()
+		level_size.position = start_point
+		level_size.end = end_point * 16
+		draw_rect(level_size, Color.red, false)
+
+
+
+func _set_start_point(value):
+	start_point = value
+	update()
+
+
+func _set_end_point(value):
+	end_point = value
+	update()
 
 
 func _clean_map():
 	solid_enviorment.clear()
 
 
-func _make_map():
+func make_map():
+	emit_signal("started")
 	_clean_map()
 	# Generar elementos externos
 	_make_outbounds()
 	# Generar elementos internos
 	_make_inbounds()
+	# Crea salidas y mejora el aspecto visual de los muros
+	_clean_outbounds()
+	emit_signal("finished")
 	
 
 
 func _make_inbounds():
+	# Genera el suelo
+	_generate_solids()
+	# Suavizar terreno
+	for _attemp in range(0, smooth_times):
+		_smooth_map()
+	# Elimina bloques flotantes
+	_clean_solids()
+	# Reorganiza el tile
+	_set_tiles()
+
+
+func _generate_solids():
 	for x in range(start_point.x+1, end_point.x):
 		for y in range(start_point.y+6, end_point.y):
 			var num = rand_range(0.0, 100.0)
 			if num < floor_probability:
 				solid_enviorment.set_cell(x, y, Tile.EMPTY)
+	
 	solid_enviorment.update_bitmask_region(Vector2.ZERO, end_point)
 
 
+func _clean_solids():
+	# Esta aproximación requiere un poco de explicación
+	# Verifico cada tile vecino en los ejes
+	# Si la suma es mayor que 1, se conserva
+	# El chiste es eliminar diagonales y bloques flotantes.
+	
+	for x in range(start_point.x+1, end_point.x):
+		for y in range(start_point.y, end_point.y):
+			var neighbor_tile = 0
+			for direction in [directions[1],directions[3],directions[4],directions[6]]:
+				var current_tile = Vector2(x,y)+direction
+				
+				if solid_enviorment.get_cell(current_tile.x,current_tile.y) == Tile.EMPTY:
+					neighbor_tile += 1
+			
+			if neighbor_tile < 1:
+				solid_enviorment.set_cell(x,y, -1)
+
+
+func _set_tiles():
+	for x in range(start_point.x+1, end_point.x):
+		for y in range(start_point.y, end_point.y):
+			if solid_enviorment.get_cell(x, y) != -1:
+				_evaluate_cell(Vector2(x, y))
+
+
+func _evaluate_cell(cell_coordinate):
+	# Esta es larga de explicar en texto, refierete a la imagen del papel
+	# Basicamente evaluamos las posibilidades y segun eso se da el tile
+	
+	var tile = Tile.EMPTY
+	var flip_x = false
+	var flip_y = false
+	
+	var neighbor_tile = 0
+	for direction in [directions[1],directions[3],directions[4],directions[6]]:
+		if solid_enviorment.get_cellv(cell_coordinate+direction) != -1:
+			neighbor_tile += 1
+	
+	if neighbor_tile >= 4:
+		tile = Tile.EMPTY
+	
+	# TOP
+	var top_neighbor = solid_enviorment.get_cellv(cell_coordinate+directions[6])
+	var left_neighbor = solid_enviorment.get_cellv(cell_coordinate+directions[3])
+	var right_neighbor = solid_enviorment.get_cellv(cell_coordinate+directions[4])
+	var bot_neighbor = solid_enviorment.get_cellv(cell_coordinate+directions[1])
+	
+	if top_neighbor == -1:
+		tile = Tile.CORNER
+		if left_neighbor == -1:
+			flip_x = false
+		elif right_neighbor == -1:
+			flip_x = true
+		
+		if right_neighbor != -1 && left_neighbor != -1:
+			tile = Tile.FLOOR
+			flip_x = false
+	else:
+		tile = Tile.WALL
+		flip_x = solid_enviorment.is_cell_x_flipped(
+			(cell_coordinate.x+directions[6].x), 
+			(cell_coordinate.y+directions[6].y))
+		
+		if left_neighbor != -1:
+			flip_x = true
+		
+		if left_neighbor != -1 && right_neighbor != -1:
+			tile = Tile.EMPTY
+			flip_x = false
+		
+		if bot_neighbor == -1:
+			tile = Tile.CORNER
+			flip_y = true
+			if left_neighbor == -1:
+				flip_x = false
+			elif right_neighbor == -1:
+				flip_x = true
+			
+			if right_neighbor != -1 && left_neighbor != -1:
+				tile = Tile.FLOOR
+				flip_x = false
+	
+	
+	solid_enviorment.set_cellv(cell_coordinate, tile, flip_x, flip_y)
+
 func _make_outbounds():
+	# Crea los limites laterales
+	
 	for y in range(start_point.y, end_point.y):
 		solid_enviorment.set_cell(start_point.x, y, Tile.LEFT_LIMIT)
 		solid_enviorment.set_cell(end_point.x, y, Tile.RIGHT_LIMIT)
 
 
+func _clean_outbounds():
+	# Verifica si las paredes limites tienen algun vecino
+	# Si es asi, se vuelve un tile vacio
+	
+	for y in range(start_point.y, end_point.y):
+		var left_neighbor = solid_enviorment.get_cellv(Vector2(end_point.x,y)+directions[3])
+		var right_neighbor = solid_enviorment.get_cellv(Vector2(start_point.x,y)+directions[4])
+		
+		if left_neighbor != -1:
+			solid_enviorment.set_cell(end_point.x, y, Tile.EMPTY)
+		if right_neighbor != -1:
+			solid_enviorment.set_cell(start_point.x, y, Tile.EMPTY)
+
+
 func _smooth_map():
+	var smooth_tiles = []
+	
 	for x in range(start_point.x+1, end_point.x):
 		for y in range(start_point.y, end_point.y):
 			var neighbor_walls = 0
@@ -75,16 +218,11 @@ func _smooth_map():
 					solid_enviorment.get_cell(current_tile.x,current_tile.y) == Tile.RIGHT_LIMIT
 					):
 						neighbor_walls += 1
-			
+
 			if neighbor_walls > 4:
-				solid_enviorment.set_cell(x, y, Tile.EMPTY)
+				smooth_tiles.append(Vector2(x,y))
+
+	for coordinate in smooth_tiles:
+		solid_enviorment.set_cellv(coordinate, Tile.EMPTY)
+
 	solid_enviorment.update_bitmask_region(Vector2.ZERO, end_point)
-
-
-func _check_simple_noise():
-	if simple_noise == null:
-		simple_noise = OpenSimplexNoise.new()
-#		simple_noise.octaves = 1.0
-#		simple_noise.period = 12
-#		simple_noise.persistence = 0.7
-	simple_noise.seed = randi()

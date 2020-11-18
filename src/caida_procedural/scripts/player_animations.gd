@@ -7,7 +7,7 @@ var can_change_animation = true
 func _ready():
 	playing = true
 
-func _process(delta):
+func _process(_delta):
 	var selected_animation = ""
 
 	owner_direction = owner.get_direction()	

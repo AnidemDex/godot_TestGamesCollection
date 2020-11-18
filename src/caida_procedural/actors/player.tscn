@@ -39,19 +39,19 @@ region = Rect2( 0, 32, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 16, 16 )
+region = Rect2( 16, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 1 )
-region = Rect2( 16, 16, 16, 16 )
+region = Rect2( 32, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 1 )
-region = Rect2( 32, 16, 16, 16 )
+region = Rect2( 48, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 1 )
-region = Rect2( 48, 16, 16, 16 )
+region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=13]
 animations = [ {
@@ -70,25 +70,25 @@ animations = [ {
 "name": "fall",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 9 ) ],
-"loop": true,
-"name": "jump",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 11 ) ],
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 10 ) ],
 "loop": true,
 "name": "walk",
 "speed": 10.0
+}, {
+"frames": [ SubResource( 12 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=14]
 radius = 3.21397
 height = 6.8453
 
-[sub_resource type="RectangleShape2D" id=16]
+[sub_resource type="RectangleShape2D" id=15]
 extents = Vector2( 3.25, 6.125 )
 
-[sub_resource type="RectangleShape2D" id=15]
+[sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 2.1875, 0.960946 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -113,7 +113,7 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitDetector"]
 modulate = Color( 0.980392, 0.054902, 0.00784314, 1 )
 position = Vector2( 0, 1 )
-shape = SubResource( 16 )
+shape = SubResource( 15 )
 
 [node name="StompDetector" type="Area2D" parent="." groups=[
 "cosas_que_golpean",
@@ -124,7 +124,7 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StompDetector"]
 position = Vector2( 0, 7 )
-shape = SubResource( 15 )
+shape = SubResource( 16 )
 one_way_collision = true
 
 [node name="BulletGenerator" type="Position2D" parent="."]
