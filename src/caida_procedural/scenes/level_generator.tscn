@@ -10,5 +10,7 @@ __meta__ = {
 Luego pon cada tile de forma individual"
 }
 
-[node name="SolidEnviorment" parent="." instance=ExtResource( 2 )]
+[node name="Navigation2D" type="Navigation2D" parent="."]
+
+[node name="SolidEnviorment" parent="Navigation2D" instance=ExtResource( 2 )]
 tile_data = PoolIntArray(  )

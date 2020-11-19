@@ -12,12 +12,15 @@ enum Tile {
 	WALL,
 	RIGHT_LIMIT,
 	BOX,
+	NAVIGATION,
 }
 
 export(float, 1, 100, 0.1) var floor_probability: float = 18
 export var start_point : Vector2 = Vector2.ZERO setget _set_start_point
 export var end_point : Vector2 = Vector2(9,64) setget _set_end_point
 export var smooth_times : int = 1
+
+var box_methods = ["_single_box"]
 
 #-1,-1[5]	0,-1[6]	1,-1[7]
 #-1,0 [3]	0,0 [x]	1,0 [4]
@@ -28,7 +31,7 @@ var directions = [
 	Vector2(0,-1), Vector2(1,-1)
 	]
 
-onready var solid_enviorment: TileMap = $SolidEnviorment
+onready var solid_enviorment: TileMap = $Navigation2D/SolidEnviorment
 
 func _ready() -> void:
 	randomize()
@@ -69,6 +72,8 @@ func make_map():
 	# Generar elementos internos
 	_make_inbounds()
 	# Crea salidas y mejora el aspecto visual de los muros
+	_make_store()
+	_make_exit()
 	_clean_outbounds()
 	emit_signal("finished")
 	
@@ -84,6 +89,12 @@ func _make_inbounds():
 	_clean_solids()
 	# Reorganiza el tile
 	_set_tiles()
+	# Crea el relleno de navegación
+	if not _can_create_navigation():
+		print("Oops, mapa equivocado. Generando otro")
+		make_map()
+	# Crea cajas destructibles
+	_generate_boxes()
 
 
 func _generate_solids():
@@ -182,12 +193,21 @@ func _evaluate_cell(cell_coordinate):
 	
 	solid_enviorment.set_cellv(cell_coordinate, tile, flip_x, flip_y)
 
+
 func _make_outbounds():
 	# Crea los limites laterales
 	
 	for y in range(start_point.y, end_point.y):
 		solid_enviorment.set_cell(start_point.x, y, Tile.LEFT_LIMIT)
 		solid_enviorment.set_cell(end_point.x, y, Tile.RIGHT_LIMIT)
+
+
+func _make_exit():
+	pass
+
+
+func _make_store():
+	pass
 
 
 func _clean_outbounds():
@@ -198,9 +218,9 @@ func _clean_outbounds():
 		var left_neighbor = solid_enviorment.get_cellv(Vector2(end_point.x,y)+directions[3])
 		var right_neighbor = solid_enviorment.get_cellv(Vector2(start_point.x,y)+directions[4])
 		
-		if left_neighbor != -1:
+		if left_neighbor != -1 and left_neighbor != Tile.BOX and left_neighbor != Tile.NAVIGATION:
 			solid_enviorment.set_cell(end_point.x, y, Tile.EMPTY)
-		if right_neighbor != -1:
+		if right_neighbor != -1 and right_neighbor != Tile.BOX and right_neighbor != Tile.NAVIGATION:
 			solid_enviorment.set_cell(start_point.x, y, Tile.EMPTY)
 
 
@@ -226,3 +246,43 @@ func _smooth_map():
 		solid_enviorment.set_cellv(coordinate, Tile.EMPTY)
 
 	solid_enviorment.update_bitmask_region(Vector2.ZERO, end_point)
+
+
+func _can_create_navigation() -> bool:
+	# Devuelve True si pudo crear un camino
+	# False si no
+	
+	for x in range(start_point.x+1, end_point.x):
+		for y in range(start_point.y, end_point.y):
+			if solid_enviorment.get_cell(x,y) == -1:
+				solid_enviorment.set_cell(x,y, Tile.NAVIGATION)
+	
+	solid_enviorment.update_dirty_quadrants()	
+	
+	var start = solid_enviorment.map_to_world(Vector2(int(end_point.x/2+1),1))
+	var end = solid_enviorment.map_to_world(Vector2(int(end_point.x/2+1),end_point.y-1))
+	var path: PoolVector2Array = $Navigation2D.get_simple_path(start, end)
+	
+	for x in range(start_point.x+1, end_point.x):
+		for y in range(start_point.y, end_point.y):
+			if solid_enviorment.get_cell(x,y) == Tile.NAVIGATION:
+				solid_enviorment.set_cell(x,y, -1)
+	
+	if path.size() > 0:
+		return true
+	else:
+		return false
+
+
+func _generate_boxes():
+	for x in range(start_point.x+1, end_point.x):
+		for y in range(start_point.y+6, end_point.y):
+			var num = rand_range(0.0, 100.0)
+			if num < floor_probability:
+				var selected_figure = randi() % box_methods.size()
+				call(box_methods[selected_figure], Vector2(x,y))
+
+func _single_box(cell_coordinate):
+	var top_neighbor = solid_enviorment.get_cellv(cell_coordinate+directions[6])
+	if solid_enviorment.get_cellv(cell_coordinate) == -1 && top_neighbor == -1:
+		solid_enviorment.set_cellv(cell_coordinate, Tile.BOX)

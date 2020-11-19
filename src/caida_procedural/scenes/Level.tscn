@@ -1,12 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/caida_procedural/scenes/level_generator.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/caida_procedural/scripts/level_configurator.gd" type="Script" id=2]
 [ext_resource path="res://src/caida_procedural/scenes/UI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/scenes/cameras/ShakeCamera2D.tscn" type="PackedScene" id=4]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 112.232, 55.9359 )
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
@@ -24,16 +21,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EndPoint" type="Area2D" parent="."]
-visible = false
-position = Vector2( 754.558, 53.2437 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EndPoint"]
-shape = SubResource( 1 )
-
 [node name="PlayerStartPoint" type="Position2D" parent="."]
 position = Vector2( 273, -128 )
 __meta__ = {
@@ -45,6 +32,7 @@ zoom = Vector2( 0.5, 0.5 )
 limit_left = 64
 limit_top = 0
 limit_right = 588
+editor_draw_limits = false
 lock_x = true
 
 [node name="LevelGenerator" parent="." instance=ExtResource( 1 )]
