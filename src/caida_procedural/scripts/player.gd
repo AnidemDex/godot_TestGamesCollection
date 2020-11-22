@@ -13,13 +13,22 @@ export(float, 1, 10, 1) var bullet_impulse: float = 10
 
 var actual_speed = Vector2.ZERO
 var enemy_impulse = 2
+var default_bullets = CP_PLAYERDATA.default_bullets
 
+var _bullets = CP_PLAYERDATA.bullets
 var _bullet_impulse = false
 var _enemy_stomped = false
 
 func _ready() -> void:
 	bullet_impulse = clamp(bullet_impulse, 0.001, 12)
 	pass
+
+func _process(delta: float) -> void:
+	default_bullets = CP_PLAYERDATA.default_bullets
+	_bullets = CP_PLAYERDATA.bullets
+	
+	if is_on_floor():
+		CP_PLAYERDATA.reload_bullets()
 
 func _physics_process(delta):
 	var direction = get_direction()
@@ -74,6 +83,7 @@ func get_direction() -> Vector2:
 
 func _on_BulletGenerator_bullet_generated():
 	_bullet_impulse = true
+	CP_PLAYERDATA.bullets -= 1
 	emit_signal("bullet_generated")
 
 

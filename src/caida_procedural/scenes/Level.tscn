@@ -22,7 +22,7 @@ __meta__ = {
 }
 
 [node name="PlayerStartPoint" type="Position2D" parent="."]
-position = Vector2( 80, -128 )
+position = Vector2( 88, -128 )
 __meta__ = {
 "_edit_group_": true
 }

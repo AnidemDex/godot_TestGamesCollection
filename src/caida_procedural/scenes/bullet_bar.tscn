@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/caida_procedural/enviorment/bullet_bar.png" type="Texture" id=1]
+
+[node name="BulletBar" type="TextureRect"]
+margin_right = 32.0
+margin_bottom = 256.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
