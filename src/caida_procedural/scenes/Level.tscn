@@ -16,24 +16,24 @@ layer = -1
 [node name="ColorRect2" type="ColorRect" parent="Background"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.176471, 0.176471, 0.176471, 1 )
+color = Color( 0.101961, 0.101961, 0.101961, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PlayerStartPoint" type="Position2D" parent="."]
-position = Vector2( 273, -128 )
+position = Vector2( 80, -128 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="ShakeCamera2D" parent="PlayerStartPoint" instance=ExtResource( 4 )]
 zoom = Vector2( 0.5, 0.5 )
-limit_left = 64
+limit_left = -160
 limit_top = 0
 limit_right = 588
-editor_draw_limits = false
+limit_bottom = 1100
 lock_x = true
 
 [node name="LevelGenerator" parent="." instance=ExtResource( 1 )]
-position = Vector2( 200, 0 )
+position = Vector2( 6, 0 )

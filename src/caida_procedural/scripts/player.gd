@@ -8,13 +8,18 @@ export(int) var gravity: int = 264
 export(float, 0.0, 1.0) var friction = 0.5
 export(float, 0.0, 1.0) var acceleration = 0.25
 
-export(int, 1, 8) var bullet_impulse = 8
+# Mientras mas alto sea este valor, menos impulso tendrá
+export(float, 1, 10, 1) var bullet_impulse: float = 10
 
 var actual_speed = Vector2.ZERO
 var enemy_impulse = 2
 
 var _bullet_impulse = false
 var _enemy_stomped = false
+
+func _ready() -> void:
+	bullet_impulse = clamp(bullet_impulse, 0.001, 12)
+	pass
 
 func _physics_process(delta):
 	var direction = get_direction()
@@ -48,7 +53,7 @@ func calculate_speed(
 	if is_jump_interrupted:
 		speed.y = 0.0
 	if _bullet_impulse:
-		speed.y = -jump_speed/bullet_impulse
+		speed.y = -jump_speed+(bullet_impulse*10)
 		_bullet_impulse = false
 	if _enemy_stomped:
 		speed.y = -jump_speed/enemy_impulse

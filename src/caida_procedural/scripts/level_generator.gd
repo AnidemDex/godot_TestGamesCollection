@@ -32,6 +32,7 @@ var directions = [
 	]
 
 onready var solid_enviorment: TileMap = $Navigation2D/SolidEnviorment
+onready var exit: TileMap = preload("res://src/caida_procedural/scenes/exit.tscn").instance()
 
 func _ready() -> void:
 	randomize()
@@ -49,6 +50,18 @@ func _draw() -> void:
 		draw_rect(level_size, Color.red, false)
 
 
+func make_map():
+	emit_signal("started")
+	
+	var sucefully_map = _start_new_map()
+	
+	while sucefully_map != true:
+		sucefully_map = _start_new_map()
+	
+	_finish_new_map()
+	
+	emit_signal("finished")
+
 
 func _set_start_point(value):
 	start_point = value
@@ -64,22 +77,25 @@ func _clean_map():
 	solid_enviorment.clear()
 
 
-func make_map():
-	emit_signal("started")
+func _start_new_map() -> bool:
 	_clean_map()
 	# Generar elementos externos
 	_make_outbounds()
 	# Generar elementos internos
-	_make_inbounds()
+	if _can_make_inbounds():
+		return true
+	else:
+		return false
+
+
+func _finish_new_map():
 	# Crea salidas y mejora el aspecto visual de los muros
 	_make_store()
 	_make_exit()
 	_clean_outbounds()
-	emit_signal("finished")
-	
 
 
-func _make_inbounds():
+func _can_make_inbounds() -> bool:
 	# Genera el suelo
 	_generate_solids()
 	# Suavizar terreno
@@ -91,10 +107,11 @@ func _make_inbounds():
 	_set_tiles()
 	# Crea el relleno de navegación
 	if not _can_create_navigation():
-		print("Oops, mapa equivocado. Generando otro")
-		make_map()
+		push_warning("Oops, mapa equivocado. Generando otro...")
+		return false
 	# Crea cajas destructibles
 	_generate_boxes()
+	return true
 
 
 func _generate_solids():
@@ -203,7 +220,8 @@ func _make_outbounds():
 
 
 func _make_exit():
-	pass
+	add_child(exit)
+	exit.position = Vector2(0, solid_enviorment.map_to_world(end_point).y)
 
 
 func _make_store():

@@ -11,6 +11,9 @@ var trauma = 0.0  # Current shake strength.
 var trauma_power = 2  # Trauma exponent. Use [2, 3].
 var noise_y = 0
 
+onready var viewport: Viewport = get_viewport()
+onready var canvas_transform: Transform2D = viewport.canvas_transform
+
 onready var noise = OpenSimplexNoise.new()
 
 func _ready():
@@ -21,6 +24,8 @@ func _ready():
 
 
 func _process(delta):
+	DEBUG.camera_position = get_camera_screen_center()
+	
 	if target:
 		if lock_x:
 			global_position.y = get_node(target).global_position.y

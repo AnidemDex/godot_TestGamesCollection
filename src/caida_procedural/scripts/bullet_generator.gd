@@ -2,9 +2,15 @@ extends Position2D
 
 signal bullet_generated
 
-export var bullet_impulse = 10
-
 onready var bullet = preload("res://src/caida_procedural/actors/bullet.tscn")
+
+func _process(delta: float) -> void:
+	update()
+	
+func _draw() -> void:
+	pass
+	
+	
 
 func _unhandled_input(event: InputEvent):
 	if event.is_action_pressed("key_z") or event.is_action_pressed("key_c"):

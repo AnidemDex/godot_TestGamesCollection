@@ -4,12 +4,13 @@
 [ext_resource path="res://Assets/caida_procedural/player/bullet.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3.20318, 1.4166 )
+extents = Vector2( 3.20318, 2.174 )
 
 [node name="Bullet" type="Area2D" groups=[
 "bullets",
 "cosas_que_golpean",
 ]]
+position = Vector2( 0, -0.463515 )
 collision_layer = 2
 script = ExtResource( 1 )
 __meta__ = {
@@ -21,7 +22,6 @@ speed = 15
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 0.531779 )
 shape = SubResource( 1 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
