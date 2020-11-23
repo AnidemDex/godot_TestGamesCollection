@@ -7,7 +7,7 @@ onready var bullet_container = $BulletBar/VBoxContainer
 
 func _ready() -> void:
 	check_bullets()
-	CP_PLAYERDATA.connect("bullets_changed", self, "check_bullets")
+	var _signal = CP_PLAYERDATA.connect("bullets_changed", self, "check_bullets")
 
 func check_bullets():
 	bullets = CP_PLAYERDATA.bullets

@@ -37,8 +37,8 @@ func _get_selected_object():
 		info_label_obj_name.text = "Name: "+String(result[0].collider.name)
 		info_label_coordinates.text = "Coord: "+String(result[0].collider.get_global_transform_with_canvas())
 		if result[0].collider is TileMap:
-			var pos = result[0].collider.world_to_map(mouse_position)
-			var w_pos = result[0].collider.map_to_world(pos)
+			var _pos = result[0].collider.world_to_map(mouse_position)
+			var _w_pos = result[0].collider.map_to_world(_pos)
 
 
 

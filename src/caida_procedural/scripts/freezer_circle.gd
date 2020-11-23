@@ -1,3 +1,4 @@
+tool
 extends Node2D
 
 var degree = 0
@@ -19,7 +20,7 @@ func _ready() -> void:
 	collision.shape = shape
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not Engine.editor_hint:
 		degree = 0.01
 		out_circle.rotate(-degree)
@@ -44,3 +45,7 @@ func _on_OutCircle_draw() -> void:
 
 func _on_InCircle_draw() -> void:
 	in_circle.draw_arc(Vector2.ZERO, r, 0, 25, 45, Color.red)
+
+
+func _on_Area2D_body_entered(body: Node) -> void:
+	pass # Replace with function body.

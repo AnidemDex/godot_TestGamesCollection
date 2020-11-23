@@ -4,7 +4,7 @@ signal bullets_changed
 signal default_health_changed
 
 var default_bullets = 4 setget set_default_bullets
-var bullets = 8 setget set_bullets
+var bullets = 0 setget set_bullets
 
 var default_health = 4 setget set_default_health
 var health = 4 setget set_health

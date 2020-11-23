@@ -16,6 +16,7 @@ enum Tile {
 }
 
 export(float, 1, 100, 0.1) var floor_probability: float = 18
+export(float, 1, 100, 1) var store_probability: float = 20
 export var start_point : Vector2 = Vector2.ZERO setget _set_start_point
 export var end_point : Vector2 = Vector2(9,64) setget _set_end_point
 export var smooth_times : int = 1
@@ -33,6 +34,7 @@ var directions = [
 
 onready var solid_enviorment: TileMap = $Navigation2D/SolidEnviorment
 onready var exit: TileMap = preload("res://src/caida_procedural/scenes/exit.tscn").instance()
+onready var store := preload("res://src/caida_procedural/scenes/store_entrance.tscn").instance()
 
 func _ready() -> void:
 	randomize()
@@ -225,6 +227,25 @@ func _make_exit():
 
 
 func _make_store():
+	var num = rand_range(0.0, 100.0)
+	if num < store_probability:
+		add_child(store)
+		var store_position = Vector2(
+			solid_enviorment.map_to_world(end_point).x, 
+			rand_range(solid_enviorment.map_to_world(end_point).y/2, solid_enviorment.map_to_world(end_point).y-(16*24))
+			)
+
+		store_position.y -= int(store_position.y) % 16
+
+		store.position = store_position
+		
+		var pos = solid_enviorment.to_local(store.position)
+		for tile in range(-1,3):
+			solid_enviorment.set_cellv(Vector2(end_point.x,solid_enviorment.world_to_map(pos).y-tile),-1)
+		
+		for x in range(start_point.x+1, end_point.x):
+			for y in range(solid_enviorment.world_to_map(pos).y-4, solid_enviorment.world_to_map(pos).y+5):
+				solid_enviorment.set_cell(x,y,-1)
 	pass
 
 

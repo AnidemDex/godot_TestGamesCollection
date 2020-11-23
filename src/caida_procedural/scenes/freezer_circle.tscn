@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/caida_procedural/scripts/freezer_circle.gd" type="Script" id=1]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 32.0
 
 [node name="FreezerCircle" type="Node2D"]
 z_index = -10
@@ -16,6 +19,8 @@ z_index = 1
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
 [connection signal="draw" from="InCircle" to="." method="_on_InCircle_draw"]
 [connection signal="draw" from="OutCircle" to="." method="_on_OutCircle_draw"]
 [connection signal="draw" from="Base" to="." method="_on_Base_draw"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

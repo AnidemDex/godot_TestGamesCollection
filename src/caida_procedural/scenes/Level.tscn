@@ -37,3 +37,4 @@ lock_x = true
 
 [node name="LevelGenerator" parent="." instance=ExtResource( 1 )]
 position = Vector2( 6, 0 )
+store_probability = 100.0

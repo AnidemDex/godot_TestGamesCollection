@@ -4,7 +4,7 @@ signal bullet_generated
 
 onready var bullet = preload("res://src/caida_procedural/actors/bullet.tscn")
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	update()
 	
 func _draw() -> void:

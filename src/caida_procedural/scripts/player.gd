@@ -23,7 +23,7 @@ func _ready() -> void:
 	bullet_impulse = clamp(bullet_impulse, 0.001, 12)
 	pass
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	default_bullets = CP_PLAYERDATA.default_bullets
 	_bullets = CP_PLAYERDATA.bullets
 	
