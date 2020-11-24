@@ -22,6 +22,11 @@ var LevelProperties = {
 var level_number = 1
 var level_attemps = 0
 
+var previous_time : float = 0.0
+
+func start_timer():
+	$Timer.start()
+
 func reset():
 	default_bullets = 8
 	bullets = 0
@@ -60,3 +65,7 @@ func go_to_level():
 	LevelProperties.store_probability = randi() % 30
 	level_number += 1
 	GLOBAL.change_world(GLOBAL.SCENES[GLOBAL.SceneName.CAIDA_PROCEDURAL_LEVEL])
+
+
+func _on_Timer_timeout() -> void:
+	previous_time += 0.01

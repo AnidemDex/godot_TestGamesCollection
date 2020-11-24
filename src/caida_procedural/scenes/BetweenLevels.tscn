@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/caida_procedural/scripts/between_levels_script.gd" type="Script" id=1]
 [ext_resource path="res://src/caida_procedural/scenes/PlayerStartPoint.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/caida_procedural/scenes/UI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/caida_procedural/enviorment/life_bar/life_bar_bg.png" type="Texture" id=4]
+[ext_resource path="res://Assets/caida_procedural/enviorment/life_bar/life_bar.png" type="Texture" id=5]
+[ext_resource path="res://Assets/caida_procedural/enviorment/life_bar/life_bar_progress.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10, 300 )
+extents = Vector2( 10, 600 )
 
 [node name="BetweenLevels" type="Node2D"]
 script = ExtResource( 1 )
@@ -27,8 +30,46 @@ position = Vector2( 178, 298 )
 shape = SubResource( 1 )
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2( -0.755524, 286.054 )
 shape = SubResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -67.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextureProgress" type="TextureProgress" parent="CanvasLayer/Control/CenterContainer"]
+margin_left = 197.0
+margin_top = 19.0
+margin_right = 443.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 246, 28 )
+max_value = 100.0
+step = 0.1
+value = 1.0
+texture_under = ExtResource( 4 )
+texture_over = ExtResource( 5 )
+texture_progress = ExtResource( 6 )
+fill_mode = 3
+nine_patch_stretch = true
+stretch_margin_top = 2
+stretch_margin_bottom = 1
+
+[node name="Tween" type="Tween" parent="."]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

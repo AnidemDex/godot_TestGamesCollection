@@ -43,7 +43,7 @@ func _on_OutCircle_draw() -> void:
 
 
 func _on_InCircle_draw() -> void:
-	in_circle.draw_arc(Vector2.ZERO, r, 0, 25, 45, Color.red)
+	in_circle.draw_arc(Vector2.ZERO, r, 0, 25, 45, Color("f2f2f2"))
 
 
 func _on_Area2D_body_entered(body: Node) -> void:

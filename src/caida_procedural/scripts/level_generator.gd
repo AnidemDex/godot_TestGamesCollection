@@ -128,6 +128,10 @@ func _can_make_inbounds() -> bool:
 		smooth_times -= 1
 		smooth_times = clamp(smooth_times, 1, 4)
 		attemps += 1
+		
+		if attemps > 100:
+			smooth_times = 1
+			floor_probability = 18
 		return false
 	# Crea cajas destructibles
 	_generate_boxes()

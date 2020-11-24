@@ -30,7 +30,7 @@ config/icon="res://icon.png"
 GLOBAL="*res://src/Scripts/global.gd"
 GAMEMETADATA="*res://src/Scripts/game_metadata.gd"
 DEBUG="*res://src/Misc/debug.tscn"
-CP_PLAYERDATA="*res://src/caida_procedural/scripts/procedural_fall_player_data.gd"
+CP_PLAYERDATA="*res://src/caida_procedural/scenes/procedural_fall_player_data.tscn"
 
 [display]
 
