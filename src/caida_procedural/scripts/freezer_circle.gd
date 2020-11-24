@@ -1,4 +1,3 @@
-tool
 extends Node2D
 
 var degree = 0
@@ -48,4 +47,12 @@ func _on_InCircle_draw() -> void:
 
 
 func _on_Area2D_body_entered(body: Node) -> void:
-	pass # Replace with function body.
+	if body.name == "Player":
+		CP_PLAYERDATA.player_freeze_world = true
+
+
+
+func _on_Area2D_body_exited(body: Node) -> void:
+	if body.name == "Player":
+		CP_PLAYERDATA.player_freeze_world = false
+

@@ -1,4 +1,3 @@
-tool
 extends Node2D
 
 signal started
@@ -15,8 +14,9 @@ enum Tile {
 	NAVIGATION,
 }
 
-export(float, 1, 100, 0.1) var floor_probability: float = 18
-export(float, 1, 100, 1) var store_probability: float = 20
+var attemps = 0
+var floor_probability: float = 18
+var store_probability: float = 20
 export var start_point : Vector2 = Vector2.ZERO setget _set_start_point
 export var end_point : Vector2 = Vector2(9,64) setget _set_end_point
 export var smooth_times : int = 1
@@ -41,6 +41,14 @@ func _ready() -> void:
 	update()
 	var _error_start = connect("started", owner, "on_LevelGenerator_started")
 	var _error_finish = connect("finished", owner, "on_LevelGenerator_finished")
+	
+	var level_properties = CP_PLAYERDATA.LevelProperties
+	
+	if end_point.y != level_properties.size_y:
+		end_point.y = level_properties.size_y
+		smooth_times = level_properties.smooth_times
+		floor_probability = level_properties.floor_probability
+		store_probability = level_properties.store_probability
 
 
 func _draw() -> void:
@@ -57,8 +65,10 @@ func make_map():
 	
 	var sucefully_map = _start_new_map()
 	
+	attemps = 0
 	while sucefully_map != true:
 		sucefully_map = _start_new_map()
+	CP_PLAYERDATA.level_attemps = attemps
 	
 	_finish_new_map()
 	
@@ -95,7 +105,11 @@ func _finish_new_map():
 	_make_store()
 	_make_exit()
 	_clean_outbounds()
+	_set_camera_limit()
 
+
+func _set_camera_limit():
+	CP_PLAYERDATA.LevelProperties.camera_limit = solid_enviorment.map_to_world(end_point).y + 64
 
 func _can_make_inbounds() -> bool:
 	# Genera el suelo
@@ -108,8 +122,12 @@ func _can_make_inbounds() -> bool:
 	# Reorganiza el tile
 	_set_tiles()
 	# Crea el relleno de navegación
+	
 	if not _can_create_navigation():
 		push_warning("Oops, mapa equivocado. Generando otro...")
+		smooth_times -= 1
+		smooth_times = clamp(smooth_times, 1, 4)
+		attemps += 1
 		return false
 	# Crea cajas destructibles
 	_generate_boxes()

@@ -1,16 +1,29 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/caida_procedural/scenes/world_enviorment.tres" type="TileSet" id=1]
 [ext_resource path="res://src/caida_procedural/scenes/freezer_circle.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/caida_procedural/scripts/exit_script.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 38.0474, 20.8349 )
 
 [node name="Exit" type="TileMap"]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 0, 536870914, 0, 9, 2, 0, 65536, 536870912, 0, 65537, 536870914, 0, 65544, 2, 0, 65545, 0, 0, 131072, 536870912, 0, 131073, 536870912, 0, 131074, 536870915, 0, 131075, 536870914, 0, 131079, 2, 0, 131080, 0, 0, 131081, 0, 0, 196608, 536870912, 0, 196609, 536870912, 0, 196610, 536870912, 0, 196611, 536870913, 0, 196615, 5, 0, 196616, 0, 0, 196617, 0, 0, 262144, 536870912, 0, 262145, 536870912, 0, 262146, 536870912, 0, 262147, 536870913, 0, 262151, 5, 0, 262152, 0, 0, 262153, 0, 0 )
+script = ExtResource( 3 )
 
 [node name="FreezerCircle" parent="." instance=ExtResource( 2 )]
 show_behind_parent = true
 position = Vector2( 88.3662, 66.3243 )
 rotation = 2024.67
 radius = 3
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+modulate = Color( 0.337255, 1, 0, 1 )
+position = Vector2( 90.273, 73.4171 )
+shape = SubResource( 1 )
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

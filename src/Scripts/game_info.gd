@@ -83,11 +83,11 @@ func _on_PlayButton_pressed() -> void:
 					GLOBAL.SceneName.RHYTHM_HERO_MAINMENU
 					)
 			2:
-				# NOT IMPLEMENTED
-#				emit_signal(
-#					"change_world_request", 
-#					GLOBAL.SceneName.CAIDA_PROCEDURAL
-#					)
+				# FIXME: Cambiar el nivel de PROCEDURAL_LEVEL a MAINMENU
+				emit_signal(
+					"change_world_request", 
+					GLOBAL.SceneName.CAIDA_PROCEDURAL_LEVEL
+					)
 				pass
 
 

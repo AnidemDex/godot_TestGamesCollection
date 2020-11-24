@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/caida_procedural/scripts/life_bar_script.gd" type="Script" id=1]
+[ext_resource path="res://Assets/caida_procedural/enviorment/life_bar/life_bar_bg.png" type="Texture" id=2]
+[ext_resource path="res://Assets/caida_procedural/enviorment/life_bar/life_bar.png" type="Texture" id=3]
+[ext_resource path="res://Assets/caida_procedural/enviorment/life_bar/life_bar_progress.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://Assets/Fonts/HeartbitXX2Px.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+outline_size = 1
+outline_color = Color( 1, 0, 0, 1 )
+font_data = SubResource( 1 )
+
+[node name="LifeBar" type="TextureProgress"]
+margin_right = 123.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 123, 23 )
+size_flags_horizontal = 6
+size_flags_vertical = 4
+max_value = 4.0
+value = 4.0
+texture_under = ExtResource( 2 )
+texture_over = ExtResource( 3 )
+texture_progress = ExtResource( 4 )
+nine_patch_stretch = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 6.0
+margin_bottom = 1.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0.101961, 0.101961, 0.101961, 1 )
+text = "0/0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

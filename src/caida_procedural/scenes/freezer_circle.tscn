@@ -24,3 +24,4 @@ shape = SubResource( 1 )
 [connection signal="draw" from="OutCircle" to="." method="_on_OutCircle_draw"]
 [connection signal="draw" from="Base" to="." method="_on_Base_draw"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

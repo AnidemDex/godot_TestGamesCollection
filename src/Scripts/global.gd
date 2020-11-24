@@ -9,6 +9,10 @@ enum SceneName {
 	RHYTHM_HERO_MAINMENU,
 	RHYTHM_HERO_1,
 	RHYTHM_HERO_2,
+	CAIDA_PROCEDURAL_MAINMENU,
+	CAIDA_PROCEDURAL_LEVEL,
+	CAIDA_PROCEDURAL_STORE,
+	CAIDA_PROCEDURAL_BETWEEN_LEVEL,
 	}
 
 enum GameState {
@@ -22,6 +26,10 @@ const SCENES = [
 	"res://src/rhythm_hero/scenes/RhythmHeroMenu.tscn",
 	"res://src/rhythm_hero/worlds/RhythmHeroWorld.tscn",
 	"res://src/rhythm_hero/worlds/RhythmHeroWorld_2.tscn",
+	"",
+	"res://src/caida_procedural/scenes/Level.tscn",
+	"",
+	"res://src/caida_procedural/scenes/BetweenLevels.tscn",
 	]
 
 var resource: ResourceQueue = preload("res://src/Scripts/resource_queue.gd").new()
@@ -30,13 +38,14 @@ var current_world = null
 var current_game_state = GameState.PLAYING
 var _loading_world = null
 var _is_background_loading = false
-onready var world_scene = get_node_or_null("/root/Main/WorldScene")
+var world_scene = null
 
 
 func _ready():
 	resource.start()
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() -1)
+	world_scene = get_node_or_null("/root/Main/WorldScene")
 
 
 func _process(_delta: float) -> void:

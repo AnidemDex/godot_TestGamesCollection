@@ -17,6 +17,7 @@ anchor_right = 0.052
 anchor_bottom = 0.825
 margin_right = -0.279999
 margin_bottom = -3.05176e-05
+rect_min_size = Vector2( 33, 297 )
 rect_pivot_offset = Vector2( 0, 148 )
 script = ExtResource( 2 )
 __meta__ = {
